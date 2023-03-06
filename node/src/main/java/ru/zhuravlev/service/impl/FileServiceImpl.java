@@ -21,7 +21,6 @@ import ru.zhuravlev.service.FileService;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
-import java.net.URL;
 
 
 @Service
@@ -107,30 +106,5 @@ public class FileServiceImpl implements FileService {
                 .mimeType(telegramDoc.getMimeType())
                 .fileSize(telegramDoc.getFileSize())
                 .build();
-    }
-
-    private byte[] downloadFile(String filePath) {
-        String fullUri = fileStorageUri.replace("{token}", token)
-                .replace("{filePath}", filePath);
-        URL urlObj = null;
-        try {
-            urlObj = new URL(fullUri);
-        } catch (MalformedURLException e) {
-            throw new UploadFileException(e);
-        }
-        try (InputStream is = urlObj.openStream()) {
-            return is.readAllBytes();
-        } catch (IOException e) {
-            throw new UploadFileException(urlObj.toExternalForm(), e);
-        }
-    }
-
-    private ResponseEntity<String> getFilePath(String field) {
-        RestTemplate restTemplate = new RestTemplate();
-        HttpHeaders headers = new HttpHeaders();
-        HttpEntity<String> request = new HttpEntity<>(headers);
-
-        return restTemplate.exchange(token, field
-        );
     }
 }
