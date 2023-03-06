@@ -74,7 +74,7 @@ public class MainServiceImpl implements MainService {
         } else if (WAIT_FOR_EMAIL_STATE.equals(userState)) {
         } else {
             log.error("Непредвиденное действие пользователя" + userState);
-            output = ("Ты ввел какое-то не то сообщение, ты меня удивляешь!)");
+            output = (")");
         }
 
         var chatId = update.getMessage().getChatId();
@@ -100,7 +100,7 @@ public class MainServiceImpl implements MainService {
         } catch (UploadFileException ex) {
 
             log.error(ex);
-            String error = "К сожалению, загрузка файла не удалась(((";
+            String error = "К сожалению, загрузка файла не удалась(";
             sendAnswer(error, chatId);
         }
     }
@@ -157,51 +157,41 @@ public class MainServiceImpl implements MainService {
         } else if (JOKE.equals(cmd)) {
             return joke();
         } else if (ANSWER.equals(cmd)) {
-            return "Умничка!" + kiss + " Скажу секрет, когда будем вместе)\n"
+            return "
                     + "/else?";
         } else if (ELSE.equals(cmd)) {
-            return "Ты можешь отправить сюда свою фотку, чтобы я раньше смог увидеть твои глазки" + eye;
-            //+ sendImageUploadingAFile("resources/pic/demo.jpg", "@Sasha_GSXR");
+            return " + eye;
+          
         } else if (MEET.equals(cmd)) {
-            return "Приглашаю тебя сегодня вечером на свидание" + ugar + "У нас заказан столик на 20:30 в одном прикольном месте. \n"
-                    + "Я думаю, мы классно проведем вечер) Уверен, сейчас ты как всегда красива" + nice + ", а настроение я тебе обязательно, если что, подниму" + party + "\n"
-                    + "Так что в 19:00 буду у тебя" + zub + "\n"
+            return " + party + "\n"
+                    + " + zub + "\n"
                     + "/place?";
         } else if (PLACE.equals(cmd)) {
-            return "Первый в Москве андерграунд ресторан" + whoa + "Москва, Страстной бул., 4, стр. 3.";
+            return "";
 //        } if (ANSWER.equals(cmd) == false) {
-//            return "Хмммм, а ну-ка попробуй еще разок!D";
+//            return "";
         } else if (START.equals(cmd)) {
-            return "Привет!" + kissingHeart + "Я - виртуальный Саша, и я хочу сделать этот день немного особенным." + smile + "И по-особенному поздравить тебя с днём влюбленных сердечек" + scream + "\n"
-                    + "Это - интерактивная " + heart + "валентинка" + heart + ", здесь есть пара прикольных вещей, которые я могу показать тебе.\n"
-                    + "Чтобы посмотреть все, напиши мне \n"
-                    + "/help, и я отвечу)";
+            return "
         } else {
-            return whoa + "Я пока еще не настолько феноменально умён" + astonished + "\n"
-                    + "Давай еще раз попробуем." + yum + "\n"
+            return whoa + "" + astonished + "\n"
+                    + "." + yum + "\n"
                     + help();
         }
     }
 
     private String help() {
         return "Cписок доступных команд \n"
-                + heart + "валентинки" + heart + ":\n"
-                + "/date - " + heartEye + "14.02" + heartEye + "(щелкни, чтобы узнать, что мы будем сегодня делать);\n"
-                + "/jopa - " + clown + "загадка" + clown;
-//                + "/cancel - отмена выполнения текущей команды(добавил по-приколу)";
-//                + "/registration - регистрация пользователя;\n"
-        //TODO добавить несколько пунктов
+               
     }
 
     private String joke() {
-        return "Если отгадаешь одну из твоих фраз, которую я загадал, то расскажу тебе один свой секрет" + sweat
-                + "только вводи внимательно" + astonished;
+        return "
     }
 
     private String cancelProcess(AppUser appUser) {
         appUser.setState(BASIC_STATE);
         appUserDAO.save(appUser);
-        return "Команда отменена, бейби!";
+        return "Команда отменена!";
     }
 
     private AppUser findOrSaveAppUser(Update update) {
@@ -213,7 +203,6 @@ public class MainServiceImpl implements MainService {
                     .username(telegramUser.getUserName())
                     .firstName(telegramUser.getFirstName())
                     .lastName(telegramUser.getLastName())
-                    //TODO изменить значение по умолчанию после добавления регистраии
                     .isActive(true)
                     .state(BASIC_STATE)
                     .build();
