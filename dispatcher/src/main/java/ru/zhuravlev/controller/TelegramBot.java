@@ -42,21 +42,6 @@ public class TelegramBot extends TelegramLongPollingBot {
         updateController.processUpdate(update);
 
 
-//        var response = new SendMessage();
-//        response.setChatId(originalMessage.getChatId());
-//                response.setText("Привет от разработчика!)" +
-//                "оставь тут свои: \n" +
-//                        "Фамилия Имя:\n" +
-//                        "Возраст:\n" +
-//                        "Кем Работаешь:\n" +
-//                        "Хобби, увлечения:\n" +
-//                        "Семейное положение:\n" +
-//                        "Три главных ваших качеств:\n" +
-//                        "Три отрицательных ваших качеств:\n" +
-//                        "Какой запрос ( если есть):\n" +
-//                        "Зачем тебе это надо:");
-//        sendAnswerMessage(response);
-
     }
     public void sendAnswerMessage(SendMessage message) {
         if (message != null) {
