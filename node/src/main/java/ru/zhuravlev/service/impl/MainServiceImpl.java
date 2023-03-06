@@ -150,7 +150,6 @@ public class MainServiceImpl implements MainService {
 
     private String processServiceCommand(AppUser appUser, String cmd) {
         if (REGISTRATION.equals(cmd)) {
-            //TODO добавить регистрацию
             return "Временно недоступно...";
         } else if (HELP.equals(cmd)) {
             return help();
