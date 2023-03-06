@@ -1,6 +1,6 @@
 package ru.zhuravlev.service.impl;
 
-import lombok.extern.log4j.Log4j;
+
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
@@ -17,15 +17,13 @@ import ru.zhuravlev.entity.BinaryContent;
 import ru.zhuravlev.entity.AppDocument;
 import ru.zhuravlev.exceptions.UploadFileException;
 import ru.zhuravlev.service.FileService;
-import ru.zhuravlev.service.enums.LinkType;
-import ru.zhuravlev.utils.CryptoTool;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-@Log4j
+
 @Service
 public class FileServiceImpl implements FileService {
     @Value("${token}")
@@ -39,13 +37,11 @@ public class FileServiceImpl implements FileService {
     private final AppDocumentDAO appDocumentDAO;
     private final BinaryContentDAO binaryContentDAO;
     private final AppPhotoDAO appPhotoDAO;
-    private final CryptoTool cryptoTool;
 
     public FileServiceImpl(AppDocumentDAO appDocumentDAO, BinaryContentDAO binaryContentDAO, AppPhotoDAO appPhotoDAO, CryptoTool cryptoTool) {
         this.appDocumentDAO = appDocumentDAO;
         this.binaryContentDAO = binaryContentDAO;
         this.appPhotoDAO = appPhotoDAO;
-        this.cryptoTool = cryptoTool;
     }
 
     @Override
@@ -78,11 +74,7 @@ public class FileServiceImpl implements FileService {
         }
     }
 
-    @Override
-    public String generateLink(Long docId, LinkType linkType) {
-        var hash = cryptoTool.hashOf(docId);
-        return "http://" + linkAddress + "/" + linkType + "?id=" + hash;
-    }
+   
 
     private AppPhoto buildTransientAppPhoto(PhotoSize telegramPhoto, BinaryContent persistentBinaryContent) {
         return AppPhoto.builder()
@@ -126,8 +118,6 @@ public class FileServiceImpl implements FileService {
         } catch (MalformedURLException e) {
             throw new UploadFileException(e);
         }
-
-        //TODO подумать над оптимизацией
         try (InputStream is = urlObj.openStream()) {
             return is.readAllBytes();
         } catch (IOException e) {
@@ -140,12 +130,7 @@ public class FileServiceImpl implements FileService {
         HttpHeaders headers = new HttpHeaders();
         HttpEntity<String> request = new HttpEntity<>(headers);
 
-        return restTemplate.exchange(
-                fileInfoUri,
-                HttpMethod.GET,
-                request,
-                String.class,
-                token, field
+        return restTemplate.exchange(token, field
         );
     }
 }
