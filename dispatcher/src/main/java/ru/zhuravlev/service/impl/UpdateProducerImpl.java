@@ -1,6 +1,4 @@
 package ru.zhuravlev.service.impl;
-
-import lombok.extern.log4j.Log4j;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.meta.api.objects.Update;
