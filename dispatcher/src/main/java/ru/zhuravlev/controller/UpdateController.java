@@ -1,6 +1,4 @@
 package ru.zhuravlev.controller;
-
-import lombok.extern.log4j.Log4j;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
@@ -10,7 +8,6 @@ import ru.zhuravlev.utils.MessageUtils;
 import static ru.zhuravlev.model.RabbitQueue.*;
 
 @Component
-@Log4j
 public class UpdateController {
     private TelegramBot telegramBot;
     private MessageUtils messageUtils;
