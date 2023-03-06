@@ -5,8 +5,8 @@ public enum ServiceCommands {
     REGISTRATION("/registration"),
     CANCEL("/cancel"),
     START("/start"),
-    JOKE("/jopa"),
-    ANSWER("Посмотрим на твоё поведение"),
+    JOKE("/"),
+    ANSWER(""),
     MEET("/date"),
     PLACE("/place"),
     ELSE("/else");
