@@ -16,7 +16,6 @@ import ru.zhuravlev.exceptions.UploadFileException;
 import ru.zhuravlev.service.FileService;
 import ru.zhuravlev.service.MainService;
 import ru.zhuravlev.service.ProducerService;
-import ru.zhuravlev.service.enums.LinkType;
 import ru.zhuravlev.service.enums.ServiceCommands;
 
 import static ru.zhuravlev.entity.enums.UserState.BASIC_STATE;
@@ -24,9 +23,7 @@ import static ru.zhuravlev.entity.enums.UserState.WAIT_FOR_EMAIL_STATE;
 import static ru.zhuravlev.service.enums.ServiceCommands.*;
 
 @Service
-@Log4j
 public class MainServiceImpl implements MainService {
-    String ugar = EmojiParser.parseToUnicode(":stuck_out_tongue_closed_eyes:");
     String eye = EmojiParser.parseToUnicode(":stuck_out_tongue_winking_eye:");
     String heart = EmojiParser.parseToUnicode(":heart:");
     String smile = EmojiParser.parseToUnicode(":wink:");
@@ -94,9 +91,7 @@ public class MainServiceImpl implements MainService {
 
             AppDocument doc = fileService.processDoc(update.getMessage());
             String link = fileService.generateLink(doc.getId(), LinkType.GET_DOC);
-            var answer = "Документ успешно загружен! "
-                    + "Ссылка для скачивания: " + link;
-            sendAnswer(answer, chatId);
+            var answer = sendAnswer(answer, chatId);
         } catch (UploadFileException ex) {
 
             log.error(ex);
@@ -156,10 +151,9 @@ public class MainServiceImpl implements MainService {
         } else if (JOKE.equals(cmd)) {
             return joke();
         } else if (ANSWER.equals(cmd)) {
-            return "
-                    + "/else?";
+            return "/else?";
         } else if (ELSE.equals(cmd)) {
-            return " + eye;
+            return eye;
           
         } else if (MEET.equals(cmd)) {
             return " + party + "\n"
@@ -184,7 +178,7 @@ public class MainServiceImpl implements MainService {
     }
 
     private String joke() {
-        return "
+        return joke();
     }
 
     private String cancelProcess(AppUser appUser) {
